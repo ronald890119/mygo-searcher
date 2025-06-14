@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+    --color-anon: #FF8899;
+    --color-tomori: #77BBDD;
+    --color-rikki: #7777AA;
+    --color-soyo: #FFDD88;
+    --color-rana: #77DD77;
+    --color-mutsumi: #779977;
+    --color-sakiko: #7799CC;
+    --color-umiri: #335566;
+    --color-uika: #BB9955;
+    --color-nyamu: #AA4477;
+}
