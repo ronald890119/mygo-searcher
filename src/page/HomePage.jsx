@@ -122,7 +122,7 @@ const HomePage = () => {
           ) : (
             filteredKeys.map((key) => (
               <ImageCard
-                key={key}
+                s3key={key}
                 url={`${url_base}${key}`}
                 caption={key.split("/").pop().split(".")[0]} // Use the last part of the key as the caption
               />

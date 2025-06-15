@@ -1,6 +1,26 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const ImageCard = (props) => {
+  const handleDownload = () => {
+    axios
+      .get(
+        `https://oeqhffl626.execute-api.ap-east-2.amazonaws.com/production/get-presigned-url?key=${props.s3key}`
+      )
+      .then((response) => {
+        const url = response.data.url;
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = props.s3key.split("/").pop(); // Set filename
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch((error) => {
+        console.error("Error fetching presigned URL:", error);
+      });
+  };
+
   return (
     <>
       <div class="max-w-sm mx-auto bg-gray-100 border border-gray-700 rounded-lg shadow-sm">
@@ -11,7 +31,7 @@ const ImageCard = (props) => {
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-black">
             {props.caption}
           </h5>
-          <div>
+          <div class="hover:cursor-pointer" onClick={handleDownload}>
             <svg
               class="w-10 h-10"
               viewBox="0 0 24 24"
