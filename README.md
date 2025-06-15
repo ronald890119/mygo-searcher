@@ -8,7 +8,7 @@
 <small>一輩子和我一起組樂團嗎？</small>
 <br />
 <br/>
-<a href=""><strong>前往MyGO截圖搜尋器 --></strong></a>
+<a href="https://mygo-ave-mujica.ronald890119.com/"><strong>前往MyGO截圖搜尋器 --></strong></a>
 </div>
 <div align="center">
 <br/>
