@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { S3Client, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import ImageCard from "../component/ImageCard";
+import axios from "axios";
 
 // This component fetches images from an S3 bucket and displays them with a search functionality
 const HomePage = () => {
@@ -12,6 +12,23 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   // filteredKeys will hold the keys that match the search term
   const [filteredKeys, setFilteredKeys] = useState([]);
+
+  // This effect fetches all objects from the S3 bucket when the component mounts
+  useEffect(() => {
+    axios
+      .get(
+        "https://ny3k2iv2ad.execute-api.ap-east-2.amazonaws.com/production/list-s3-keys"
+      )
+      .then((response) => {
+        setKeys(response.data.body.keys);
+        setFilteredKeys(response.data.body.keys);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error("Error fetching S3 keys:", error);
+      });
+  }, []);
 
   // This effect runs whenever the searchTerm changes
   useEffect(() => {
@@ -41,53 +58,6 @@ const HomePage = () => {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  // Create an S3 client using the AWS SDK
-  const client = new S3Client({
-    region: import.meta.env.VITE_AWS_REGION,
-    credentials: {
-      accessKeyId: import.meta.env.VITE_S3_ACCESS_KEY_ID,
-      secretAccessKey: import.meta.env.VITE_S3_SECRET_ACCESS_KEY,
-    },
-  });
-
-  // This effect fetches all objects from the S3 bucket when the component mounts
-  useEffect(() => {
-    const getAllObjects = async () => {
-      let isTruncated = true;
-      let continuationToken;
-      const allKeys = [];
-
-      while (isTruncated) {
-        const command = new ListObjectsV2Command({
-          Bucket: import.meta.env.VITE_S3_BUCKET_NAME,
-          ContinuationToken: continuationToken,
-        });
-
-        try {
-          const response = await client.send(command);
-          const contents = response.Contents || [];
-
-          contents.map((item) => {
-            if (item.Key.endsWith("/")) return; // Skip directories
-            allKeys.push(item.Key);
-          });
-
-          isTruncated = response.IsTruncated;
-          continuationToken = response.NextContinuationToken;
-        } catch (err) {
-          console.error("Error listing objects:", err);
-          break;
-        }
-      }
-
-      setKeys(allKeys);
-      setLoading(false);
-      setFilteredKeys(allKeys);
-    };
-
-    getAllObjects();
-  }, []);
 
   // Construct the base URL for the S3 bucket
   const url_base = `https://${import.meta.env.VITE_S3_BUCKET_NAME}.s3.${
