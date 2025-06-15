@@ -60,9 +60,7 @@ const HomePage = () => {
   };
 
   // Construct the base URL for the S3 bucket
-  const url_base = `https://${import.meta.env.VITE_S3_BUCKET_NAME}.s3.${
-    import.meta.env.VITE_AWS_REGION
-  }.amazonaws.com/`;
+  const url_base = `https://s3.ap-east-2.amazonaws.com/mygo-ave-mujica.ronald890119.com/`;
 
   return (
     <>
