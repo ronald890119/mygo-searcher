@@ -25,7 +25,7 @@ const ImageCard = (props) => {
     <>
       <div class="max-w-sm mx-auto bg-gray-100 border border-gray-700 rounded-lg shadow-sm">
         <a target="_blank" href={props.url}>
-          <img class="rounded-t-lg" src={props.url} alt="" />
+          <img class="rounded-t-lg" loading="lazy" src={props.url} alt="" />
         </a>
         <div class="p-5 flex justify-between">
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-black">
