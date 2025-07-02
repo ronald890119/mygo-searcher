@@ -28,10 +28,14 @@ So far, this project only contains the screenshots from MyGO, the screenshots fr
 
 [MyGO Playlist by Muse](https://www.youtube.com/watch?v=WOrYBIYIwyk&list=PL12UaAf_xzfqYGkaq7fR0DpB6osiuNlYu&ab_channel=Muse%E6%9C%A8%E6%A3%89%E8%8A%B1-TW)
 
-## 更新計劃
+## Future Updates
 - [ ] Implement pagination to prevent from showing too many images at once
 - [ ] Image classification by series
 - [ ] Image classification by characters
+- Performance Improvement
+    - [ ] Search bar debounce
+    - [ ] Throttling for scrolling
+    - [ ] Efficiency improvement for searching
 
 [Vite]: https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E
 [Vite-url]: https://vitejs.dev/
