@@ -1,7 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 
 const ImageCard = (props) => {
+  const filename = props.s3key.split("/").pop().split(".")[0];
+  const base = props.url.substring(0, props.url.lastIndexOf('/') + 1);
+
   const handleDownload = () => {
     axios
       .get(
@@ -25,7 +27,7 @@ const ImageCard = (props) => {
     <>
       <div class="max-w-sm mx-auto bg-gray-100 border border-gray-700 rounded-lg shadow-sm">
         <a target="_blank" href={props.url}>
-          <img class="rounded-t-lg" loading="lazy" src={props.url} alt="" />
+          <img class="rounded-t-lg" loading="lazy" src={`${base}small/${filename}.jpg`} alt="/blur_bg.jpg" />
         </a>
         <div class="p-5 flex justify-between">
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-black">
