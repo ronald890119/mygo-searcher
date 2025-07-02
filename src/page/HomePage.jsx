@@ -17,11 +17,11 @@ const HomePage = () => {
   useEffect(() => {
     axios
       .get(
-        "https://ny3k2iv2ad.execute-api.ap-east-2.amazonaws.com/production/list-s3-keys"
+        "https://8t8c0l3nfh.execute-api.ap-east-2.amazonaws.com/production/list-s3-objects-by-json"
       )
       .then((response) => {
-        setKeys(response.data.body.keys);
-        setFilteredKeys(response.data.body.keys);
+        setKeys(response.data.body["mygo_keys"]);
+        setFilteredKeys(response.data.body["mygo_keys"]);
         setLoading(false);
       })
       .catch((error) => {
