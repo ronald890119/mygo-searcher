@@ -20,11 +20,11 @@
 此網站能搜尋 MyGO 和 Ave Mujica 的截圖，讓大家更容易~~迷失在 MyGO 的世界~~找到要的梗圖。
 
 目前此網站只包含 MyGO 的截圖，Ave Mujica 的截圖一定會在續集開播前更新完的，畢竟圖片很多張(~~實際上這是懶惰的藉口~~)。
-![my problem](https://ronald-mygo.s3.ap-east-2.amazonaws.com/MyGO/MyGO_1/%E6%98%AF%E6%88%91%E8%87%AA%E5%B7%B1%E7%9A%84%E5%95%8F%E9%A1%8C.png)
+![my problem](https://s3.ap-east-2.amazonaws.com/mygo-ave-mujica.ronald890119.com/MyGO/MyGO_1/%E6%98%AF%E6%88%91%E8%87%AA%E5%B7%B1%E7%9A%84%E5%95%8F%E9%A1%8C.png)
 
 如果有發現圖片說明與字幕不符的話，歡迎在 Issue 或寄 email 提出。<br />
 如果有大神也想一起開發或改善此網站的話，歡迎提交 Pull Request，小弟在此先感謝各位了!!
-![thank you](https://ronald-mygo.s3.ap-east-2.amazonaws.com/MyGO/MyGO_1/%E8%AC%9D%E8%AC%9D%E5%A6%B3%E5%80%91.png)
+![thank you](https://s3.ap-east-2.amazonaws.com/mygo-ave-mujica.ronald890119.com/MyGO/MyGO_13/%E6%84%9F%E8%AC%9D%E6%82%A8%E8%AE%93%E6%88%91%E4%BD%94%E7%94%A8%E7%9A%84%E5%AF%B6%E8%B2%B4%E6%99%82%E9%96%93.png)
 
 ## 開發工具們
 
