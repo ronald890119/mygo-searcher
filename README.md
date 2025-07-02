@@ -42,6 +42,10 @@
 - [ ] 新增分頁，避免一次出現過多圖片
 - [ ] 以集數來分類圖片的功能
 - [ ] 以角色來分類圖片的功能
+- 效能改善
+    - [ ] 搜尋欄防抖
+    - [ ] 頁面滾動節流
+    - [ ] 更有效率的搜尋方法
 
 [Vite]: https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E
 [Vite-url]: https://vitejs.dev/
