@@ -2,7 +2,7 @@ import axios from "axios";
 
 const ImageCard = (props) => {
   const filename = props.s3key.split("/").pop().split(".")[0];
-  const base = props.url.substring(0, props.url.lastIndexOf('/') + 1);
+  const base = props.url.substring(0, props.url.lastIndexOf("/") + 1);
 
   const handleDownload = () => {
     axios
@@ -25,10 +25,18 @@ const ImageCard = (props) => {
 
   return (
     <>
-      <div class="max-w-sm mx-auto bg-gray-100 border border-gray-700 rounded-lg shadow-sm">
-        <a target="_blank" href={props.url}>
-          <img class="rounded-t-lg" loading="lazy" src={`${base}small/${filename}.jpg`} alt="/blur_bg.jpg" />
-        </a>
+      <div class="w-full max-w-sm mx-auto bg-gray-100 border border-gray-700 rounded-lg shadow-sm">
+        <div class="aspect-[16/9] bg-gray-200 relative overflow-hidden rounded-t-lg">
+          <a target="_blank" href={props.url}>
+            <img
+              class="rounded-t-lg absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
+              loading="lazy"
+              src={`${base}small/${filename}.jpg`}
+              alt="/blur_bg.jpg"
+              onLoad={(e) => e.currentTarget.classList.add("opacity-100")}
+            />
+          </a>
+        </div>
         <div class="p-5 flex justify-between">
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-black">
             {props.caption}
