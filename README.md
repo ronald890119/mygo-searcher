@@ -33,6 +33,9 @@
 - [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
 - [![S3][S3]][S3-url]
 
+## 架構
+![architecture](/img/architecture.png)
+
 ## 截圖來源，請多多支持木棉花大哥
 
 [木棉花 MyGO 播放清單](https://www.youtube.com/watch?v=WOrYBIYIwyk&list=PL12UaAf_xzfqYGkaq7fR0DpB6osiuNlYu&ab_channel=Muse%E6%9C%A8%E6%A3%89%E8%8A%B1-TW)
