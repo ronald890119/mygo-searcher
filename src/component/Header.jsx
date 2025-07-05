@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <>
-      <header class="bg-[var(--color-umiri)] bg-opacity-0 fixed top-0 w-full h-20 z-1 md:h-25 lg:h-30">
+      <header class="bg-[var(--color-umiri)] bg-opacity-0 fixed top-0 w-full h-20 z-10 md:h-25 lg:h-30">
         <div class="px-1 mx-auto max-w-7xl sm:px-5 lg:px-8 flex lg:flex-1 justify-between">
           {/* <div class="px-0 mx-0 max-w-fit flex lg:flex-1 justify-between"> */}
           <div>
@@ -30,10 +30,7 @@ const Header = () => {
             <div>{t("header.title")}</div>
           </div>
           <div>
-            <img
-              class="h-10 w-auto my-5 md:h-15 lg:h-20"
-              src={aveMujicaLogo}
-            />
+            <img class="h-10 w-auto my-5 md:h-15 lg:h-20" src={aveMujicaLogo} />
           </div>
         </div>
       </header>

@@ -16,6 +16,11 @@ const HomePage = () => {
   // useTranslation hook is used to handle translations in the application
   const [t, i18n] = useTranslation("global");
 
+  useEffect(() => {
+    const browserLanguage = navigator.language.substring(0, 2).toLowerCase();
+    i18n.changeLanguage(browserLanguage === "zh" ? "zh" : "en");
+  }, []);
+
   // This effect fetches all objects from the S3 bucket when the component mounts
   useEffect(() => {
     axios
@@ -125,6 +130,7 @@ const HomePage = () => {
           ) : (
             filteredKeys.map((key) => (
               <ImageCard
+                key={key}
                 s3key={key}
                 url={`${url_base}${key}`}
                 caption={key.split("/").pop().split(".")[0]} // Use the last part of the key as the caption
