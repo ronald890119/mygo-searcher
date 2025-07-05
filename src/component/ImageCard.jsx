@@ -132,7 +132,7 @@ const ImageCard = (props) => {
       </div>
 
       <div
-        class="z-5 absolute bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
+        class="z-5 fixed bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
         role="alert"
         hidden={!linkCopied}
       >
@@ -160,7 +160,7 @@ const ImageCard = (props) => {
       </div>
 
       <div
-        class="z-5 absolute bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
+        class="z-5 fixed bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
         role="alert"
         hidden={!imgCopied}
       >
