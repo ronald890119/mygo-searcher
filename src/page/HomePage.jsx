@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ImageCard from "../component/ImageCard";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 // This component fetches images from an S3 bucket and displays them with a search functionality
 const HomePage = () => {
@@ -12,6 +13,13 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   // filteredKeys will hold the keys that match the search term
   const [filteredKeys, setFilteredKeys] = useState([]);
+  // useTranslation hook is used to handle translations in the application
+  const [t, i18n] = useTranslation("global");
+
+  useEffect(() => {
+    const browserLanguage = navigator.language.substring(0, 2).toLowerCase();
+    i18n.changeLanguage(browserLanguage === "zh" ? "zh" : "en");
+  }, []);
 
   // This effect fetches all objects from the S3 bucket when the component mounts
   useEffect(() => {
@@ -88,7 +96,7 @@ const HomePage = () => {
               type="text"
               id="default-search"
               class="block w-full p-4 ps-10 text-sm  border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-              placeholder="搜尋關鍵字"
+              placeholder={t("form.placeholder")}
               value={searchTerm}
               onChange={handleSearchChange}
               required
@@ -122,6 +130,7 @@ const HomePage = () => {
           ) : (
             filteredKeys.map((key) => (
               <ImageCard
+                key={key}
                 s3key={key}
                 url={`${url_base}${key}`}
                 caption={key.split("/").pop().split(".")[0]} // Use the last part of the key as the caption
