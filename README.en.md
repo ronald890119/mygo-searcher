@@ -32,11 +32,11 @@ So far, this project only contains the screenshots from MyGO, the screenshots fr
 [MyGO Playlist by Muse](https://www.youtube.com/watch?v=WOrYBIYIwyk&list=PL12UaAf_xzfqYGkaq7fR0DpB6osiuNlYu&ab_channel=Muse%E6%9C%A8%E6%A3%89%E8%8A%B1-TW)
 
 ## Future Updates
-- [ ] Implement pagination to prevent from showing too many images at once
+- [x] Add buttons for image/link copying
 - [ ] Image classification by series
 - [ ] Image classification by characters
 - Performance Improvement
-    - [ ] Search bar debounce
+    - [ ] Search bar debounce or Implement pagination to prevent from showing too many images at once
     - [ ] Throttling for scrolling
     - [ ] Efficiency improvement for searching
 
