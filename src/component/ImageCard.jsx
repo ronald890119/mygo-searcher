@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setLinkCopied, setImgCopied } from "../state/slice";
 
 const ImageCard = (props) => {
+  // useDispatch is used to dispatch actions to the Redux store
+  const dispatch = useDispatch();
   const [showButtons, setShowButtons] = useState(false);
-  const [linkCopied, setLinkCopied] = useState(false);
-  const [imgCopied, setImgCopied] = useState(false);
   const filename = props.s3key.split("/").pop().split(".")[0];
   const base = props.url.substring(0, props.url.lastIndexOf("/") + 1);
 
@@ -31,8 +33,8 @@ const ImageCard = (props) => {
     try {
       const link = props.url;
       await navigator.clipboard.writeText(link);
-      setLinkCopied(true);
-      setTimeout(() => setLinkCopied(false), 2000);
+      dispatch(setLinkCopied(true));
+      setTimeout(() => dispatch(setLinkCopied(false)), 2000);
     } catch (error) {
       console.error("Failed to copy text: ", err);
     }
@@ -47,8 +49,8 @@ const ImageCard = (props) => {
         })(),
       });
       await navigator.clipboard.write([data]);
-      setImgCopied(true);
-      setTimeout(() => setImgCopied(false), 2000);
+      dispatch(setImgCopied(true));
+      setTimeout(() => dispatch(setImgCopied(false)), 2000);
     } catch (error) {
       console.error("Failed to copy image: ", err);
     }
@@ -56,7 +58,7 @@ const ImageCard = (props) => {
 
   return (
     <>
-      <div class="w-full max-w-sm mx-auto bg-gray-100 border border-gray-700 rounded-lg shadow-sm">
+      <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 max-w-sm mx-auto bg-gray-100 border border-gray-700 rounded-lg shadow-sm">
         <div
           class="aspect-[16/9] bg-gray-200 relative overflow-hidden rounded-t-lg"
           onMouseEnter={() => setShowButtons(true)}
@@ -129,62 +131,6 @@ const ImageCard = (props) => {
             {props.caption}
           </h5>
         </div>
-      </div>
-
-      <div
-        class="z-5 fixed bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
-        role="alert"
-        hidden={!linkCopied}
-      >
-        <svg
-          class="w-10 h-10"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M7.29417 12.9577L10.5048 16.1681L17.6729 9"
-            stroke="#64E3A1"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>{" "}
-          <circle
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="#64E3A1"
-            stroke-width="2"
-          ></circle>
-        </svg>
-      </div>
-
-      <div
-        class="z-5 fixed bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
-        role="alert"
-        hidden={!imgCopied}
-      >
-        <svg
-          class="w-10 h-10"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M7.29417 12.9577L10.5048 16.1681L17.6729 9"
-            stroke="#64E3A1"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>{" "}
-          <circle
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="#64E3A1"
-            stroke-width="2"
-          ></circle>
-        </svg>
       </div>
     </>
   );

@@ -1,21 +1,39 @@
 import { useEffect, useState } from "react";
-import ImageCard from "../component/ImageCard";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import Tabs from "../component/Tabs";
+import { useDispatch, useSelector } from "react-redux";
+import ImageList from "../component/ImageList";
+import {
+  setAveMujicaKeys,
+  setFilteredAveMujicaKeys,
+  setFilteredMygoKeys,
+  setMyGOKeys,
+} from "../state/slice";
 
 // This component fetches images from an S3 bucket and displays them with a search functionality
 const HomePage = () => {
-  // keys will hold the list of image keys from the S3 bucket
-  const [keys, setKeys] = useState([]);
+  // useDispatch is used to dispatch actions to the Redux store
+  const dispatch = useDispatch();
+
+  // mygoKeys and ave_mujicaKeys are used to store the keys of images from the S3 bucket
+  const mygoKeys = useSelector((state) => state.content.mygoKeys);
+  const ave_mujicaKeys = useSelector((state) => state.content.ave_mujicaKeys);
+
   // loading will indicate whether the images are still being fetched
   const [loading, setLoading] = useState(true);
+
   // searchTerm will hold the current search input from the user
   const [searchTerm, setSearchTerm] = useState("");
-  // filteredKeys will hold the keys that match the search term
-  const [filteredKeys, setFilteredKeys] = useState([]);
+
   // useTranslation hook is used to handle translations in the application
   const [t, i18n] = useTranslation("global");
 
+  // linkCopied and imgCopied are used to show notifications when a link or image is copied
+  const linkCopied = useSelector((state) => state.content.linkCopied);
+  const imgCopied = useSelector((state) => state.content.imgCopied);
+
+  // This effect sets the language based on the browser's language setting
   useEffect(() => {
     const browserLanguage = navigator.language.substring(0, 2).toLowerCase();
     i18n.changeLanguage(browserLanguage === "zh" ? "zh" : "en");
@@ -28,8 +46,12 @@ const HomePage = () => {
         "https://8t8c0l3nfh.execute-api.ap-east-2.amazonaws.com/production/list-s3-objects-by-json"
       )
       .then((response) => {
-        setKeys(response.data.body["mygo_keys"]);
-        setFilteredKeys(response.data.body["mygo_keys"]);
+        dispatch(setMyGOKeys(response.data.body["mygo_keys"]));
+        dispatch(setAveMujicaKeys(response.data.body["ave_mujica_keys"]));
+        dispatch(setFilteredMygoKeys(response.data.body["mygo_keys"]));
+        dispatch(
+          setFilteredAveMujicaKeys(response.data.body["ave_mujica_keys"])
+        );
         setLoading(false);
       })
       .catch((error) => {
@@ -40,14 +62,13 @@ const HomePage = () => {
 
   // This effect runs whenever the searchTerm changes
   useEffect(() => {
-    console.log(`Search term: ${searchTerm}`);
-
     // If the search term is empty, show all keys
     if (searchTerm.length === 0) {
-      setFilteredKeys(keys);
+      dispatch(setFilteredMygoKeys(mygoKeys));
+      dispatch(setFilteredAveMujicaKeys(ave_mujicaKeys));
     } else {
       // Filter the keys based on the search term
-      const currentItems = keys.filter((key) =>
+      const currentItems1 = mygoKeys.filter((key) =>
         key
           .toLowerCase()
           .split("/")
@@ -57,8 +78,17 @@ const HomePage = () => {
       );
 
       // Update the filteredKeys state with the current items
-      setFilteredKeys(currentItems);
-      console.log(`Current items after search: ${currentItems}`);
+      dispatch(setFilteredMygoKeys(currentItems1));
+
+      const currentItems2 = ave_mujicaKeys.filter((key) =>
+        key
+          .toLowerCase()
+          .split("/")
+          .pop()
+          .split(".")[0]
+          .includes(searchTerm.toLowerCase())
+      );
+      dispatch(setFilteredAveMujicaKeys(currentItems2));
     }
   }, [searchTerm]);
 
@@ -67,12 +97,9 @@ const HomePage = () => {
     setSearchTerm(event.target.value);
   };
 
-  // Construct the base URL for the S3 bucket
-  const url_base = `https://s3.ap-east-2.amazonaws.com/mygo-ave-mujica.ronald890119.com/`;
-
   return (
     <>
-      <div class="mt-30 md:mt-35 lg:mt-40">
+      <div class="mt-50">
         <form class="max-w-4xl mx-auto px-3">
           <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -105,8 +132,14 @@ const HomePage = () => {
         </form>
       </div>
 
-      <div class="container mx-auto my-15">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="container mx-auto my-15 mt-5">
+        <nav class="my-5 text-sm font-medium text-center border-b text-gray-400 border-gray-700">
+          <div class="flex flex-wrap -mb-px">
+            <Tabs />
+          </div>
+        </nav>
+
+        <div class="flex justify-center flex-wrap z-0">
           {loading ? (
             <div role="status">
               <svg
@@ -128,16 +161,65 @@ const HomePage = () => {
               <span class="sr-only">Loading...</span>
             </div>
           ) : (
-            filteredKeys.map((key) => (
-              <ImageCard
-                key={key}
-                s3key={key}
-                url={`${url_base}${key}`}
-                caption={key.split("/").pop().split(".")[0]} // Use the last part of the key as the caption
-              />
-            ))
+            <ImageList />
           )}
         </div>
+      </div>
+
+      <div
+        class="z-5 fixed bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm border rounded-lg bg-gray-800 text-gray-300 border-gray-600"
+        role="alert"
+        hidden={!linkCopied}
+      >
+        <svg
+          class="w-10 h-10"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.29417 12.9577L10.5048 16.1681L17.6729 9"
+            stroke="#64E3A1"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>{" "}
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="#64E3A1"
+            stroke-width="2"
+          ></circle>
+        </svg>
+      </div>
+
+      <div
+        class="z-5 fixed bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm border rounded-lg bg-gray-800 text-gray-300 border-gray-600"
+        role="alert"
+        hidden={!imgCopied}
+      >
+        <svg
+          class="w-10 h-10"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.29417 12.9577L10.5048 16.1681L17.6729 9"
+            stroke="#64E3A1"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>{" "}
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="#64E3A1"
+            stroke-width="2"
+          ></circle>
+        </svg>
       </div>
     </>
   );
