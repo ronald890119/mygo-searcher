@@ -23,6 +23,7 @@ So far, this project only contains the screenshots from MyGO, the screenshots fr
 - [![React][React.js]][React-url]
 - [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
 - [![S3][S3]][S3-url]
+- [![Redux][Redux]][Redux-url]
 
 ## Architecture
 ![architecture](/img/architecture.png)
@@ -33,10 +34,13 @@ So far, this project only contains the screenshots from MyGO, the screenshots fr
 
 ## Future Updates
 - [x] Add buttons for image/link copying
+- [x] Some variables applied Redux
+- [x] Add tabs for Ave Mujica and MyGO
 - [ ] Image classification by series
 - [ ] Image classification by characters
 - Performance Improvement
-    - [ ] Search bar debounce or Implement pagination to prevent from showing too many images at once
+    - [x] Apply react-virtualized for rendering improvement
+    - [ ] Search bar debounce
     - [ ] Throttling for scrolling
     - [ ] Efficiency improvement for searching
 
@@ -48,3 +52,5 @@ So far, this project only contains the screenshots from MyGO, the screenshots fr
 [TailwindCSS-url]: https://tailwindcss.com/
 [S3]: https://img.shields.io/badge/AWS_S3-569A31?logo=amazons3&logoColor=fff&style=for-the-badge
 [S3-url]: https://aws.amazon.com/s3/?nc1=h_ls
+[Redux]: https://img.shields.io/badge/-Redux-black?style=flat-square&logo=redux
+[Redux-url]: https://redux.js.org/

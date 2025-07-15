@@ -32,6 +32,7 @@
 - [![React][React.js]][React-url]
 - [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
 - [![S3][S3]][S3-url]
+- [![Redux][Redux]][Redux-url]
 
 ## 架構
 ![architecture](/img/architecture.png)
@@ -43,10 +44,13 @@
 ## 更新計劃
 
 - [x] 新增複製網址及圖片的按鈕
+- [x] 部分變數使用Redux
+- [x] 新增Ave Mujica與MyGO分頁按鈕
 - [ ] 以集數來分類圖片的功能
 - [ ] 以角色來分類圖片的功能
 - 效能改善
-    - [ ] 搜尋欄防抖or新增分頁，避免一次出現過多圖片
+    - [x] 使用react-virtualized改善渲染速度
+    - [ ] 搜尋欄防抖
     - [ ] 頁面滾動節流
     - [ ] 更有效率的搜尋方法
 
@@ -58,3 +62,5 @@
 [TailwindCSS-url]: https://tailwindcss.com/
 [S3]: https://img.shields.io/badge/AWS_S3-569A31?logo=amazons3&logoColor=fff&style=for-the-badge
 [S3-url]: https://aws.amazon.com/s3/?nc1=h_ls
+[Redux]: https://img.shields.io/badge/-Redux-black?style=flat-square&logo=redux
+[Redux-url]: https://redux.js.org/
