@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.828.0",
+    "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.8",
     "axios": "^1.10.0",
     "dotenv": "^16.5.0",
@@ -19,6 +20,8 @@
     "react-dom": "^19.1.0",
     "react-i18next": "^15.6.0",
     "react-paginate": "^8.3.0",
+    "react-redux": "^9.2.0",
+    "react-virtualized": "^9.22.6",
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {

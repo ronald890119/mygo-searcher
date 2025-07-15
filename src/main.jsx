@@ -2,6 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
+import { Provider } from "react-redux";
+import { store } from "./state/store";
 
 import global_en from "./translation/en/global.json";
 import global_zh from "./translation/zh/global.json";
@@ -26,7 +28,9 @@ i18next.init({
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <I18nextProvider i18n={i18next}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </I18nextProvider>
   </StrictMode>
 );
