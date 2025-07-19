@@ -21,7 +21,7 @@ const Header = () => {
 
   return (
     <>
-      <header class="bg-gray-400 bg-opacity-0 fixed top-0 w-full z-10 h-40">
+      <header class="relative bg-gray-400 bg-opacity-0 top-0 w-full z-10 h-40">
         <img
           class="object-cover w-full z-10 h-40 opacity-50"
           src={`${date % 2 == 0 ? headerBackground1 : headerBackground2}`}

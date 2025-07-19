@@ -10,6 +10,7 @@ import {
   setFilteredMygoKeys,
   setMyGOKeys,
 } from "../state/slice";
+import BackToTopButton from "../component/BackToTopButton";
 
 // This component fetches images from an S3 bucket and displays them with a search functionality
 const HomePage = () => {
@@ -99,7 +100,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div class="mt-50">
+      <div class="mt-15">
         <form class="max-w-4xl mx-auto px-3">
           <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -144,7 +145,7 @@ const HomePage = () => {
             <div role="status">
               <svg
                 aria-hidden="true"
-                class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                class="w-8 h-8 animate-spin text-gray-600 fill-blue-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -221,6 +222,8 @@ const HomePage = () => {
           ></circle>
         </svg>
       </div>
+
+      <BackToTopButton />
     </>
   );
 };
