@@ -48,6 +48,8 @@
 - [x] 新增Ave Mujica與MyGO分頁按鈕
 - [ ] 以集數來分類圖片的功能
 - [ ] 以角色來分類圖片的功能
+- [ ] 用TypeScript重寫
+- [ ] 新增其他BanG Dream樂團
 - 效能改善
     - [x] 使用react-virtualized改善渲染速度
     - [ ] 搜尋欄防抖
