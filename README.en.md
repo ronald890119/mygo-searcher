@@ -38,6 +38,8 @@ So far, this project only contains the screenshots from MyGO, the screenshots fr
 - [x] Add tabs for Ave Mujica and MyGO
 - [ ] Image classification by series
 - [ ] Image classification by characters
+- [ ] Rebuild the site with TypeScript
+- [ ] Add more bands from BanG Dream
 - Performance Improvement
     - [x] Apply react-virtualized for rendering improvement
     - [ ] Search bar debounce
