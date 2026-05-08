@@ -1,8 +1,8 @@
 {
-    "header": {
-        "title": "MyGO!!!!!截圖搜尋器"
-    },
-    "form": {
-        "placeholder": "輸入關鍵字"
-    }
+  "header": {
+    "title": "MyGO!!!!!截圖搜尋器"
+  },
+  "form": {
+    "placeholder": "輸入關鍵字"
+  }
 }
