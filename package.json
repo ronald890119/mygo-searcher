@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
+    "lint": "oxlint .",
+    "format": "prettier --write .",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -26,18 +27,15 @@
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
-    "@eslint/js": "^9.25.0",
     "@types/node": "^25.6.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/react-virtualized": "^9.22.3",
     "@vitejs/plugin-react": "^4.4.1",
-    "eslint": "^9.25.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
+    "oxlint": "^0.16.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.2",
     "vite": "^6.3.5"
   }
 }

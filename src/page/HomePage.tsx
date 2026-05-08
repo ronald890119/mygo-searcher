@@ -1,102 +1,86 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useTranslation } from "react-i18next";
-import Tabs from "../component/Tabs";
-import { useDispatch, useSelector } from "react-redux";
-import ImageList from "../component/ImageList";
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useTranslation } from 'react-i18next'
+import Tabs from '../component/Tabs'
+import { useDispatch, useSelector } from 'react-redux'
+import ImageList from '../component/ImageList'
 import {
   setAveMujicaKeys,
   setFilteredAveMujicaKeys,
   setFilteredMygoKeys,
   setMyGOKeys,
-} from "../state/slice";
-import BackToTopButton from "../component/BackToTopButton";
-import type { RootState, AppDispatch } from "../state/store";
-import { SearchIcon } from "lucide-react";
+} from '../state/slice'
+import BackToTopButton from '../component/BackToTopButton'
+import type { RootState, AppDispatch } from '../state/store'
+import { SearchIcon } from 'lucide-react'
 
 const HomePage = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const mygoKeys = useSelector((state: RootState) => state.content.mygoKeys);
-  const ave_mujicaKeys = useSelector(
-    (state: RootState) => state.content.ave_mujicaKeys,
-  );
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [t, i18n] = useTranslation("global");
-  const linkCopied = useSelector(
-    (state: RootState) => state.content.linkCopied,
-  );
-  const imgCopied = useSelector((state: RootState) => state.content.imgCopied);
+  const dispatch = useDispatch<AppDispatch>()
+  const mygoKeys = useSelector((state: RootState) => state.content.mygoKeys)
+  const ave_mujicaKeys = useSelector((state: RootState) => state.content.ave_mujicaKeys)
+  const [loading, setLoading] = useState(true)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [t, i18n] = useTranslation('global')
+  const linkCopied = useSelector((state: RootState) => state.content.linkCopied)
+  const imgCopied = useSelector((state: RootState) => state.content.imgCopied)
 
   useEffect(() => {
-    const browserLanguage = navigator.language.substring(0, 2).toLowerCase();
-    i18n.changeLanguage(browserLanguage === "zh" ? "zh" : "en");
-  }, [i18n]);
+    const browserLanguage = navigator.language.substring(0, 2).toLowerCase()
+    i18n.changeLanguage(browserLanguage === 'zh' ? 'zh' : 'en')
+  }, [i18n])
 
   useEffect(() => {
     axios
       .get(
-        "https://8t8c0l3nfh.execute-api.ap-east-2.amazonaws.com/production/list-s3-objects-by-json",
+        'https://8t8c0l3nfh.execute-api.ap-east-2.amazonaws.com/production/list-s3-objects-by-json'
       )
       .then((response) => {
-        dispatch(setMyGOKeys(response.data.body["mygo_keys"]));
-        dispatch(setAveMujicaKeys(response.data.body["ave_mujica_keys"]));
-        dispatch(setFilteredMygoKeys(response.data.body["mygo_keys"]));
-        dispatch(
-          setFilteredAveMujicaKeys(response.data.body["ave_mujica_keys"]),
-        );
-        setLoading(false);
+        dispatch(setMyGOKeys(response.data.body['mygo_keys']))
+        dispatch(setAveMujicaKeys(response.data.body['ave_mujica_keys']))
+        dispatch(setFilteredMygoKeys(response.data.body['mygo_keys']))
+        dispatch(setFilteredAveMujicaKeys(response.data.body['ave_mujica_keys']))
+        setLoading(false)
       })
       .catch((error) => {
-        setLoading(false);
-        console.error("Error fetching S3 keys:", error);
-      });
-  }, [dispatch]);
+        setLoading(false)
+        console.error('Error fetching S3 keys:', error)
+      })
+  }, [dispatch])
 
   useEffect(() => {
     if (searchTerm.length === 0) {
-      dispatch(setFilteredMygoKeys(mygoKeys));
-      dispatch(setFilteredAveMujicaKeys(ave_mujicaKeys));
+      dispatch(setFilteredMygoKeys(mygoKeys))
+      dispatch(setFilteredAveMujicaKeys(ave_mujicaKeys))
     } else {
       const currentItems1 = mygoKeys.filter((key) =>
-        key
-          .toLowerCase()
-          .split("/")
-          .pop()!
-          .split(".")[0]
-          .includes(searchTerm.toLowerCase()),
-      );
-      dispatch(setFilteredMygoKeys(currentItems1));
+        key.toLowerCase().split('/').pop()!.split('.')[0].includes(searchTerm.toLowerCase())
+      )
+      dispatch(setFilteredMygoKeys(currentItems1))
 
       const currentItems2 = ave_mujicaKeys.filter((key) =>
-        key
-          .toLowerCase()
-          .split("/")
-          .pop()!
-          .split(".")[0]
-          .includes(searchTerm.toLowerCase()),
-      );
-      dispatch(setFilteredAveMujicaKeys(currentItems2));
+        key.toLowerCase().split('/').pop()!.split('.')[0].includes(searchTerm.toLowerCase())
+      )
+      dispatch(setFilteredAveMujicaKeys(currentItems2))
     }
-  }, [searchTerm, mygoKeys, ave_mujicaKeys, dispatch]);
+  }, [searchTerm, mygoKeys, ave_mujicaKeys, dispatch])
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
+    setSearchTerm(event.target.value)
+  }
 
   return (
     <>
       <div className="mt-15">
-        <form className="max-w-4xl mx-auto px-3">
+        <form className="mx-auto max-w-4xl px-3">
           <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <SearchIcon className="w-4 h-4 text-gray-400" />
+            <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
+              <SearchIcon className="h-4 w-4 text-gray-400" />
             </div>
             <input
               type="text"
               id="default-search"
-              className="block w-full p-4 ps-10 text-sm border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-              placeholder={t("form.placeholder")}
+              className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-4 ps-10 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
+              placeholder={t('form.placeholder')}
               value={searchTerm}
               onChange={handleSearchChange}
               required
@@ -106,18 +90,18 @@ const HomePage = () => {
       </div>
 
       <div className="container mx-auto my-15 mt-5">
-        <nav className="my-5 text-sm font-medium text-center border-b text-gray-400 border-gray-700">
-          <div className="flex flex-wrap -mb-px">
+        <nav className="my-5 border-b border-gray-700 text-center text-sm font-medium text-gray-400">
+          <div className="-mb-px flex flex-wrap">
             <Tabs />
           </div>
         </nav>
 
-        <div className="flex justify-center flex-wrap z-0">
+        <div className="z-0 flex flex-wrap justify-center">
           {loading ? (
             <div role="status">
               <svg
                 aria-hidden="true"
-                className="w-8 h-8 animate-spin text-gray-600 fill-blue-600"
+                className="h-8 w-8 animate-spin fill-blue-600 text-gray-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -140,12 +124,12 @@ const HomePage = () => {
       </div>
 
       <div
-        className="z-5 fixed bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm border rounded-lg bg-gray-800 text-gray-300 border-gray-600"
+        className="fixed bottom-2 left-1/2 z-5 flex -translate-x-1/2 rounded-lg border border-gray-600 bg-gray-800 p-4 text-sm text-gray-300"
         role="alert"
         hidden={!linkCopied}
       >
         <svg
-          className="w-10 h-10"
+          className="h-10 w-10"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -156,24 +140,18 @@ const HomePage = () => {
             strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-          ></path>{" "}
-          <circle
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="#64E3A1"
-            strokeWidth="2"
-          ></circle>
+          ></path>{' '}
+          <circle cx="12" cy="12" r="10" stroke="#64E3A1" strokeWidth="2"></circle>
         </svg>
       </div>
 
       <div
-        className="z-5 fixed bottom-2 left-1/2 -translate-x-1/2 p-4 flex text-sm border rounded-lg bg-gray-800 text-gray-300 border-gray-600"
+        className="fixed bottom-2 left-1/2 z-5 flex -translate-x-1/2 rounded-lg border border-gray-600 bg-gray-800 p-4 text-sm text-gray-300"
         role="alert"
         hidden={!imgCopied}
       >
         <svg
-          className="w-10 h-10"
+          className="h-10 w-10"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -184,20 +162,14 @@ const HomePage = () => {
             strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-          ></path>{" "}
-          <circle
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="#64E3A1"
-            strokeWidth="2"
-          ></circle>
+          ></path>{' '}
+          <circle cx="12" cy="12" r="10" stroke="#64E3A1" strokeWidth="2"></circle>
         </svg>
       </div>
 
       <BackToTopButton />
     </>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

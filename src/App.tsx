@@ -1,6 +1,6 @@
-import Header from "./component/Header";
-import HomePage from "./page/HomePage";
-import Footer from "./component/Footer";
+import Header from './component/Header'
+import HomePage from './page/HomePage'
+import Footer from './component/Footer'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <HomePage />
       <Footer />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
