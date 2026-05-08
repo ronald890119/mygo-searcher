@@ -26,6 +26,7 @@ So far, this project only contains the screenshots from MyGO, the screenshots fr
 - [![Redux][Redux]][Redux-url]
 
 ## Architecture
+
 ![architecture](/img/architecture.png)
 
 ## Source of Screenshot
@@ -33,18 +34,19 @@ So far, this project only contains the screenshots from MyGO, the screenshots fr
 [MyGO Playlist by Muse](https://www.youtube.com/watch?v=WOrYBIYIwyk&list=PL12UaAf_xzfqYGkaq7fR0DpB6osiuNlYu&ab_channel=Muse%E6%9C%A8%E6%A3%89%E8%8A%B1-TW)
 
 ## Future Updates
+
 - [x] Add buttons for image/link copying
 - [x] Some variables applied Redux
 - [x] Add tabs for Ave Mujica and MyGO
 - [ ] Image classification by series
 - [ ] Image classification by characters
-- [ ] Rebuild the site with TypeScript
+- [x] Rebuild the site with TypeScript
 - [ ] Add more bands from BanG Dream
 - Performance Improvement
-    - [x] Apply react-virtualized for rendering improvement
-    - [ ] Search bar debounce
-    - [ ] Throttling for scrolling
-    - [ ] Efficiency improvement for searching
+  - [x] Apply react-virtualized for rendering improvement
+  - [ ] Search bar debounce
+  - [ ] Throttling for scrolling
+  - [ ] Efficiency improvement for searching
 
 [Vite]: https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E
 [Vite-url]: https://vitejs.dev/

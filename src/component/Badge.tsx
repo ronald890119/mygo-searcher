@@ -1,15 +1,16 @@
 import { useSelector } from "react-redux";
+import type { RootState } from "../state/store";
 
-const Badge = (props) => {
-  // Determine the category from props or default to "default"
-  const category = props.category || "default";
+interface BadgeProps {
+  category: string;
+}
 
-  // Use useSelector to access the Redux store state
+const Badge = ({ category = "default" }: BadgeProps) => {
   const filteredMygoKeys = useSelector(
-    (state) => state.content.filtered_mygoKeys
+    (state: RootState) => state.content.filtered_mygoKeys,
   );
   const filteredAveMujicaKeys = useSelector(
-    (state) => state.content.filtered_ave_mujicaKeys
+    (state: RootState) => state.content.filtered_ave_mujicaKeys,
   );
 
   if (category === "mygo") {

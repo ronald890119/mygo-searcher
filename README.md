@@ -35,6 +35,7 @@
 - [![Redux][Redux]][Redux-url]
 
 ## 架構
+
 ![architecture](/img/architecture.png)
 
 ## 截圖來源，請多多支持木棉花大哥
@@ -48,13 +49,13 @@
 - [x] 新增Ave Mujica與MyGO分頁按鈕
 - [ ] 以集數來分類圖片的功能
 - [ ] 以角色來分類圖片的功能
-- [ ] 用TypeScript重寫
+- [x] 用TypeScript重寫
 - [ ] 新增其他BanG Dream樂團
 - 效能改善
-    - [x] 使用react-virtualized改善渲染速度
-    - [ ] 搜尋欄防抖
-    - [ ] 頁面滾動節流
-    - [ ] 更有效率的搜尋方法
+  - [x] 使用react-virtualized改善渲染速度
+  - [ ] 搜尋欄防抖
+  - [ ] 頁面滾動節流
+  - [ ] 更有效率的搜尋方法
 
 [Vite]: https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E
 [Vite-url]: https://vitejs.dev/
