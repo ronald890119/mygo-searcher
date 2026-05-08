@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
+import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "./state/store";
 
@@ -25,12 +25,12 @@ i18next.init({
   },
 });
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <I18nextProvider i18n={i18next}>
       <Provider store={store}>
         <App />
       </Provider>
     </I18nextProvider>
-  </StrictMode>
+  </StrictMode>,
 );

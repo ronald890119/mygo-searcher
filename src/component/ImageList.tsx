@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import ImageCard from "./ImageCard";
-import "react-virtualized/styles.css"; // Import the styles for react-virtualized
+import "react-virtualized/styles.css";
 import {
   CellMeasurer,
   CellMeasurerCache,
@@ -8,54 +8,47 @@ import {
   AutoSizer,
   WindowScroller,
 } from "react-virtualized";
+import type { ListRowProps } from "react-virtualized";
+import type { RootState } from "../state/store";
 
 const ImageList = () => {
-  // Get the state from the Redux store
-  const mygoTabClicked = useSelector((state) => state.content.mygoTabClicked);
+  const mygoTabClicked = useSelector(
+    (state: RootState) => state.content.mygoTabClicked,
+  );
   const filteredMygoKeys = useSelector(
-    (state) => state.content.filtered_mygoKeys
+    (state: RootState) => state.content.filtered_mygoKeys,
   );
   const filteredAveMujicaKeys = useSelector(
-    (state) => state.content.filtered_ave_mujicaKeys
+    (state: RootState) => state.content.filtered_ave_mujicaKeys,
   );
 
-  // Construct the base URL for the S3 bucket
   const url_base = `https://s3.ap-east-2.amazonaws.com/mygo-ave-mujica.ronald890119.com/`;
 
-  // Create a cache for the cell measurements
   const cache = new CellMeasurerCache({
     fixedWidth: true,
     defaultHeight: 300,
   });
 
-  // Define constants for cell dimensions
-  const getColumnCount = () => {
+  const getColumnCount = (): number => {
     const viewportWidth = window.innerWidth;
-    const columnCount =
-      viewportWidth > 1024
-        ? 4
-        : viewportWidth > 768
-        ? 3
-        : viewportWidth > 640
-        ? 2
-        : 1;
-    return columnCount;
+    if (viewportWidth > 1024) return 4;
+    if (viewportWidth > 768) return 3;
+    if (viewportWidth > 640) return 2;
+    return 1;
   };
 
-  // Calculate the number of rows based on the number of columns and the total number of items
-  const getRowCount = () => {
+  const getRowCount = (): number => {
     const columnCount = getColumnCount();
     const tempList = mygoTabClicked ? filteredMygoKeys : filteredAveMujicaKeys;
     return Math.ceil(tempList.length / columnCount);
   };
 
-  // Render a row of images
-  const renderRow = ({ index, key, style, parent }) => {
+  const renderRow = ({ index, key, style, parent }: ListRowProps) => {
     const columnCount = getColumnCount();
     const tempList = mygoTabClicked ? filteredMygoKeys : filteredAveMujicaKeys;
     const rowItems = tempList.slice(
       index * columnCount,
-      index * columnCount + columnCount
+      index * columnCount + columnCount,
     );
 
     return (
@@ -68,13 +61,20 @@ const ImageList = () => {
       >
         <div
           key={key}
-          class="flex flex-row justify-center gap-4 py-4"
+          className="flex flex-row justify-center gap-4 py-4"
           style={style}
         >
           {rowItems.map((s3key) => {
             const imageUrl = `${url_base}${s3key}`;
-            const caption = s3key.split("/").pop().split(".")[0];
-            return <ImageCard s3key={s3key} url={imageUrl} caption={caption} />;
+            const caption = s3key.split("/").pop()!.split(".")[0];
+            return (
+              <ImageCard
+                key={s3key}
+                s3key={s3key}
+                url={imageUrl}
+                caption={caption}
+              />
+            );
           })}
         </div>
       </CellMeasurer>
@@ -83,7 +83,7 @@ const ImageList = () => {
 
   return (
     <>
-      <div class="w-full z-0">
+      <div className="w-full z-0">
         <WindowScroller>
           {({ height, scrollTop }) => (
             <>

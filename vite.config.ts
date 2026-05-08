@@ -5,10 +5,9 @@ import { config } from 'dotenv';
 
 config();
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   define: {
-    'process.env': process.env
+    'process.env': process.env,
   },
-})
+});

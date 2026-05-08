@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import Badge from "./Badge";
 import { toggleMygoTabClicked } from "../state/slice";
+import type { RootState, AppDispatch } from "../state/store";
 
 const Tabs = () => {
-  // useDispatch is used to dispatch actions to the Redux store
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const mygoTabClicked = useSelector(
+    (state: RootState) => state.content.mygoTabClicked,
+  );
 
-  // useSelector is used to access the Redux store state
-  const mygoTabClicked = useSelector((state) => state.content.mygoTabClicked);
-
-  // handleClick function dispatches the toggleMygoTabClicked action when a tab is clicked
   const handleClick = () => {
     dispatch(toggleMygoTabClicked());
   };
@@ -18,7 +17,7 @@ const Tabs = () => {
     <>
       <button
         onClick={handleClick}
-        class={`inline-block p-4 border-b-2 rounded-t-lg hover:cursor-pointer transition-colors duration-300 ease-in-out ${
+        className={`inline-block p-4 border-b-2 rounded-t-lg hover:cursor-pointer transition-colors duration-300 ease-in-out ${
           mygoTabClicked
             ? "border-transparent hover:text-gray-300"
             : "border-blue-500 text-blue-500"
@@ -29,7 +28,7 @@ const Tabs = () => {
       </button>
       <button
         onClick={handleClick}
-        class={`inline-block p-4 border-b-2 rounded-t-lg hover:cursor-pointer transition-colors duration-300 ease-in-out ${
+        className={`inline-block p-4 border-b-2 rounded-t-lg hover:cursor-pointer transition-colors duration-300 ease-in-out ${
           mygoTabClicked
             ? "border-blue-500 text-blue-500"
             : "border-transparent hover:text-gray-300"
