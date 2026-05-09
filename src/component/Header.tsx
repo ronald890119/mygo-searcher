@@ -1,19 +1,19 @@
-import { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-import mygoLogo from '../assets/logo_mygo.webp'
-import aveMujicaLogo from '../assets/Ave_Mujica_logo.webp'
-import headerBackground1 from '../assets/mygo-bg.webp'
-import headerBackground2 from '../assets/ave-mujica-bg.jpg'
+import mygoLogo from "../assets/logo_mygo.webp";
+import aveMujicaLogo from "../assets/Ave_Mujica_logo.webp";
+import headerBackground1 from "../assets/mygo-bg.webp";
+import headerBackground2 from "../assets/ave-mujica-bg.jpg";
 
 const Header = () => {
-  const date = new Date().getDate()
-  const [t, i18n] = useTranslation('global')
+  const date = new Date().getDate();
+  const [t, i18n] = useTranslation("global");
 
   useEffect(() => {
-    const browserLanguage = navigator.language.substring(0, 2).toLowerCase()
-    i18n.changeLanguage(browserLanguage === 'zh' ? 'zh' : 'en')
-  }, [i18n])
+    const browserLanguage = navigator.language.substring(0, 2).toLowerCase();
+    i18n.changeLanguage(browserLanguage === "zh" ? "zh" : "en");
+  }, [i18n]);
 
   return (
     <>
@@ -28,7 +28,7 @@ const Header = () => {
           </div>
           <div className="my-auto text-center font-serif text-sm text-gray-800 md:text-xl lg:text-3xl">
             <div>一生、バンドしてくれる？</div>
-            <div>{t('header.title')}</div>
+            <div>{t("header.title")}</div>
           </div>
           <div className="my-auto align-middle">
             <img className="h-10 w-auto opacity-70 md:h-15 lg:h-20" src={mygoLogo} />
@@ -36,7 +36,7 @@ const Header = () => {
         </div>
       </header>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
