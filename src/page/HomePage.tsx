@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import ImageList from "../component/ImageList";
+import ImageList from "../components/ImageList";
 import {
   setAveMujicaKeys,
   setFilteredAveMujicaKeys,
@@ -12,7 +12,7 @@ import {
 } from "../state/slice";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import BackToTopButton from "../component/BackToTopButton";
+import BackToTopButton from "../components/BackToTopButton";
 import type { RootState, AppDispatch } from "../state/store";
 import { SearchInput } from "@/components/search-input";
 import { Spinner } from "@/components/ui/spinner";
